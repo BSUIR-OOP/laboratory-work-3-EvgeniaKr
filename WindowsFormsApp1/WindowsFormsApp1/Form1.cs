@@ -76,7 +76,7 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            using (FileStream fileStream = new FileStream("file.xml", FileMode.OpenOrCreate))
+            using (FileStream fileStream = new FileStream("file.bin", FileMode.OpenOrCreate))
             {
                 IFormatter formatter = new BinaryFormatter();
 
@@ -88,7 +88,7 @@ namespace WindowsFormsApp1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            using (FileStream fileStream = new FileStream("file.xml", FileMode.OpenOrCreate))
+            using (FileStream fileStream = new FileStream("file.bin", FileMode.OpenOrCreate))
             {
                 IFormatter formatter = new BinaryFormatter();
 

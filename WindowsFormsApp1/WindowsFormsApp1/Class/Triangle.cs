@@ -11,7 +11,7 @@ namespace WindowsFormsApp1.Class
     {
         public override string Sound()
         {
-            return "Meow";
+            return "Triangle";
         }
     }
 }
