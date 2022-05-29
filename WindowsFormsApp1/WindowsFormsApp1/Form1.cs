@@ -12,6 +12,7 @@ using System.Reflection;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using static WindowsFormsApp1.Serelezator;
 
 namespace WindowsFormsApp1
 {
@@ -73,26 +74,28 @@ namespace WindowsFormsApp1
                 }
             }
         }
-
+        
         private void button4_Click(object sender, EventArgs e)
         {
-            using (FileStream fileStream = new FileStream("file.bin", FileMode.OpenOrCreate))
+           
+            using (FileStream fileStream = new FileStream("file1.bin", FileMode.OpenOrCreate))
             {
-                IFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(fileStream, FiguresList);
+                byte[] bytes = Serialize<ListFigures>(FiguresList);
+                fileStream.Write(bytes, 0, bytes.Length);
                 FiguresList.Clear();
                 listBox1.Items.Clear();
+
             }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            using (FileStream fileStream = new FileStream("file.bin", FileMode.OpenOrCreate))
+            using (FileStream fileStream = new FileStream("file1.bin", FileMode.OpenOrCreate))
             {
-                IFormatter formatter = new BinaryFormatter();
+                byte[] bytes = new byte[fileStream.Length];
+                fileStream.Read(bytes, 0, bytes.Length);
+                FiguresList = Deserialize<ListFigures>(bytes);
 
-                FiguresList = formatter.Deserialize(fileStream) as List<ListFigures>;
                 foreach (var item in FiguresList)
                 {
                     listBox1.Items.Add(item.Name);
